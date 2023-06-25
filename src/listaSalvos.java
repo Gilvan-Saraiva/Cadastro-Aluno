@@ -9,7 +9,10 @@ import java.nio.file.StandardCopyOption;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-
+/**
+ * @author junior
+ * Executa a segunda tela, que tem a lista jframe e o botão para remover o aluno selecionado
+ */
 public class listaSalvos extends javax.swing.JFrame {
 
     private DefaultListModel<String> listModel;
@@ -19,10 +22,12 @@ public class listaSalvos extends javax.swing.JFrame {
         initComponents();
         this.filePath = filePath;
         listModel = new DefaultListModel<>();
-        loadSavedAlunos();
+        CarregarAlunos();
     }
-
-    private void removeAlunoFromCSV(String aluno) {
+    /** metodo que remove os alunos diretamente no arquivo CSV
+     * 
+     */
+    private void removeAlunoDoCSV(String aluno) {
         try {
             Path source = Path.of(filePath);
             Path tempFile = Files.createTempFile("temp", ".csv");
@@ -42,7 +47,7 @@ public class listaSalvos extends javax.swing.JFrame {
         }
     }
 
-    private void loadSavedAlunos() {
+    private void CarregarAlunos() {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -153,6 +158,9 @@ public class listaSalvos extends javax.swing.JFrame {
         dispose();
     }
 
+    /** 
+     * Botão que executa o removeAlunoFromCSV
+     */
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {
         if (jListAlunos.getSelectedIndex() != -1) {
             int confirm = JOptionPane.showConfirmDialog(this, "Deseja remover o aluno selecionado?", "Remover Aluno",
@@ -162,7 +170,7 @@ public class listaSalvos extends javax.swing.JFrame {
                 String alunoRemovido = listModel.getElementAt(selectedIndex);
                 listModel.remove(selectedIndex);
                 jListAlunos.setModel(listModel);
-                removeAlunoFromCSV(alunoRemovido);
+                removeAlunoDoCSV(alunoRemovido);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um aluno para remover.", "Nenhum Aluno Selecionado",
