@@ -11,11 +11,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 import java.io.*;
-import java.nio.file.Files;
 
 /**
  *
  * @author luise
+ * @param Tela inicial que cadastra alunos
  */
 
 public class TelaCadastro extends javax.swing.JFrame {
@@ -28,10 +28,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     }
 
-    @SuppressWarnings("unchecked")
-
     public void initComponents() {
-
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Aluno.txtNome = new javax.swing.JTextField();
@@ -45,7 +42,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         Aluno.txtIdade = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         btnSalvar = new javax.swing.JButton();
         Aluno.txtTelefone = new javax.swing.JFormattedTextField();
         Aluno.textField = new JTextField(10);
@@ -88,7 +85,8 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jLabel8.setText("CPF:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "M", "F" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "M", "F" }));
+
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,10 +234,6 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     public void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {
 
-        String nomeCliente = Aluno.txtNome.getText();
-        JOptionPane.showMessageDialog(rootPane, "Nome do cliente: " + nomeCliente, "Informação",
-                JOptionPane.INFORMATION_MESSAGE);
-
     }
 
     private void txtIdadeActionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,7 +247,11 @@ public class TelaCadastro extends javax.swing.JFrame {
     public void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
 
     }
-
+/**
+ * Esse metodo, executa todos os campos do Jframe TelaCadastro, apenas clicando no botão "Salvar"
+ * @param evt
+ * @throws IOException
+ */
     public void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
 
         String nome = Aluno.txtNome.getText();
@@ -376,36 +374,6 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     }
 
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {
-        TelaCadastro telaCadastro = new TelaCadastro();
-
-        String nome = Aluno.txtNome.getText();
-        String matricula = Aluno.txtMatricula.getText();
-        String sexo = (String) telaCadastro.jComboBox1.getSelectedItem();
-        String dataNascimento = Aluno.txtDataNascimento.getText();
-        String idade = Aluno.txtIdade.getText();
-        String cpf = Aluno.txtCPF.getText();
-        String telefone = Aluno.txtTelefone.getText();
-
-        File file = new File("data.csv");
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-
-            for (String line : Files.readAllLines(file.toPath())) {
-                String[] data = line.split(";");
-                if (!data[0].equals(nome) || !data[1].equals(matricula) || !data[2].equals(sexo)
-                        || !data[3].equals(dataNascimento) || !data[4].equals(idade) || !data[5].equals(cpf)
-                        || !data[6].equals(telefone)) {
-                    writer.write(line + "\n");
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Erro ao remover o registro: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        JOptionPane.showMessageDialog(null, "Registro removido com sucesso!");
-    }
-
     /**
      * @param args
      */
@@ -454,7 +422,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
