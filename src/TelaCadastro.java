@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +25,11 @@ public class TelaCadastro extends javax.swing.JFrame {
         formatarCpf();
         formatarData();
         formatarTel();
-       
+
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     public void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
@@ -52,7 +53,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel1.setText("Cadastro");
 
         jLabel2.setText("Nome:");
@@ -100,9 +101,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
 
         btnSalvar.setBackground(new java.awt.Color(20, 240, 20));
-        btnSalvar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnSalvar.setFont(new java.awt.Font("Arial", 1, 12));
         btnSalvar.setText("SALVAR");
-        btnEditar.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Arial", 1, 11));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,49 +253,60 @@ public class TelaCadastro extends javax.swing.JFrame {
     public void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
 
     }
-    
-    
 
     public void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
 
         String nome = Aluno.txtNome.getText();
         String matricula = Aluno.txtMatricula.getText();
+        String cpf = Aluno.txtCPF.getText();
         String sexo = (String) jComboBox1.getSelectedItem();
         String dataNascimento = Aluno.txtDataNascimento.getText();
         String idade = Aluno.txtIdade.getText();
-        String cpf = Aluno.txtCPF.getText();
         String telefone = Aluno.txtTelefone.getText();
 
         List<String> data = new ArrayList<>();
 
         data.add(nome);
         data.add(matricula);
+        data.add(cpf);
         data.add(sexo);
         data.add(dataNascimento);
         data.add(idade);
-        data.add(cpf);
         data.add(telefone);
 
         Map<String, String> dataMap = new HashMap<>();
         dataMap.put("nome", nome);
         dataMap.put("matricula", matricula);
+        dataMap.put("cpf", cpf);
         dataMap.put("sexo", sexo);
         dataMap.put("dataNascimento", dataNascimento);
         dataMap.put("idade", idade);
-        dataMap.put("cpf", cpf);
         dataMap.put("telefone", telefone);
         File file = new File("data.csv");
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file,true))) {
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            int count = 0;
+            String[] orderedKeys = { "nome", "matricula", "cpf" };
+            for (String key : orderedKeys) {
+                if (dataMap.containsKey(key)) {
+                    String valor = dataMap.get(key);
+                    writer.write(key + ": " + valor);
+                    count++;
+                    if (count < dataMap.size()) {
+                        writer.write(";");
+                    }
+                }
+            }
 
             for (Map.Entry<String, String> entry : dataMap.entrySet()) {
-
-                String valor = entry.getValue();
-                String chave = entry.getKey();
-
-                writer.write(chave + ": " + valor + ";");
-            
+                String key = entry.getKey();
+                if (!Arrays.asList(orderedKeys).contains(key)) {
+                    String valor = entry.getValue();
+                    writer.write(";" + key + ": " + valor);
+                }
             }
-             writer.newLine();
+
+            writer.newLine();
             System.out.println("Arquivo CSV criado com sucesso!");
         } catch (IOException e) {
             System.err.println("Erro ao criar o arquivo CSV: " + e.getMessage());
@@ -322,7 +334,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     private static void executarCamposDeTexto(JTextField... campos) {
         for (JTextField campo : campos) {
-            // Realize a ação desejada em cada campo de texto
+
             String texto = campo.getText();
             System.out.println(texto);
         }
@@ -354,7 +366,6 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     }
 
-
     public void formatarTel() {
         try {
             MaskFormatter masktel = new MaskFormatter("(##)#####-####");
@@ -364,42 +375,41 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
 
     }
-   private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {
-    TelaCadastro telaCadastro = new TelaCadastro();
 
-  
-    String nome = Aluno.txtNome.getText();
-    String matricula = Aluno.txtMatricula.getText();
-    String sexo = (String) telaCadastro.jComboBox1.getSelectedItem();
-    String dataNascimento = Aluno.txtDataNascimento.getText();
-    String idade = Aluno.txtIdade.getText();
-    String cpf = Aluno.txtCPF.getText();
-    String telefone = Aluno.txtTelefone.getText();
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {
+        TelaCadastro telaCadastro = new TelaCadastro();
 
-    File file = new File("data.csv");
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        String nome = Aluno.txtNome.getText();
+        String matricula = Aluno.txtMatricula.getText();
+        String sexo = (String) telaCadastro.jComboBox1.getSelectedItem();
+        String dataNascimento = Aluno.txtDataNascimento.getText();
+        String idade = Aluno.txtIdade.getText();
+        String cpf = Aluno.txtCPF.getText();
+        String telefone = Aluno.txtTelefone.getText();
 
-        // Iterate through the data in the file and remove the data that matches the data entered in "btnSalvar"
-        for (String line : Files.readAllLines(file.toPath())) {
-            String[] data = line.split(";");
-            if (!data[0].equals(nome) || !data[1].equals(matricula) || !data[2].equals(sexo) || !data[3].equals(dataNascimento) || !data[4].equals(idade) || !data[5].equals(cpf) || !data[6].equals(telefone)) {
-                writer.write(line + "\n");
+        File file = new File("data.csv");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+
+            for (String line : Files.readAllLines(file.toPath())) {
+                String[] data = line.split(";");
+                if (!data[0].equals(nome) || !data[1].equals(matricula) || !data[2].equals(sexo)
+                        || !data[3].equals(dataNascimento) || !data[4].equals(idade) || !data[5].equals(cpf)
+                        || !data[6].equals(telefone)) {
+                    writer.write(line + "\n");
+                }
             }
+        } catch (IOException e) {
+            System.err.println("Erro ao remover o registro: " + e.getMessage());
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        System.err.println("Erro ao remover o registro: " + e.getMessage());
-        e.printStackTrace();
+
+        JOptionPane.showMessageDialog(null, "Registro removido com sucesso!");
     }
 
-    // Show a message to the user
-    JOptionPane.showMessageDialog(null, "Registro removido com sucesso!");
-}
-
     /**
-     * @param args the command line arguments
+     * @param args
      */
     public static void main(String args[]) {
-        
 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -421,9 +431,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null,
                     ex);
         }
-        // </editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaCadastro().setVisible(true);

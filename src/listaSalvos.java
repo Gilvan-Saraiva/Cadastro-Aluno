@@ -21,12 +21,13 @@ public class listaSalvos extends javax.swing.JFrame {
         listModel = new DefaultListModel<>();
         loadSavedAlunos();
     }
-        private void removeAlunoFromCSV(String aluno) {
+
+    private void removeAlunoFromCSV(String aluno) {
         try {
             Path source = Path.of(filePath);
             Path tempFile = Files.createTempFile("temp", ".csv");
             try (BufferedReader br = new BufferedReader(new FileReader(filePath));
-                 BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile.toFile()))) {
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile.toFile()))) {
                 String line;
                 while ((line = br.readLine()) != null) {
                     if (!line.equals(aluno)) {
@@ -40,7 +41,6 @@ public class listaSalvos extends javax.swing.JFrame {
             System.out.println("Error removing aluno from CSV: " + e.getMessage());
         }
     }
-
 
     private void loadSavedAlunos() {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -66,11 +66,11 @@ public class listaSalvos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel1.setText("Lista");
 
         btnRemover.setBackground(new java.awt.Color(240, 0, 0));
-        btnRemover.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnRemover.setFont(new java.awt.Font("Arial", 1, 12));
         btnRemover.setText("Remover");
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +78,7 @@ public class listaSalvos extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        btnVoltar.setFont(new java.awt.Font("Arial", 1, 11));
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,10 +86,10 @@ public class listaSalvos extends javax.swing.JFrame {
             }
         });
 
-        jListAlunos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jListAlunos.setFont(new java.awt.Font("Arial", 0, 12));
         jScrollPane1.setViewportView(jListAlunos);
 
-        btnAbrir.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        btnAbrir.setFont(new java.awt.Font("Arial", 1, 11));
         btnAbrir.setText("Abrir");
         btnAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,91 +100,98 @@ public class listaSalvos extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRemover)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 152, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(147, 147, 147))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAbrir)
-                        .addContainerGap())))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
+                                                .createSequentialGroup()
+                                                .addComponent(btnVoltar)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnRemover)
+                                                .addContainerGap())
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                layout.createSequentialGroup()
+                                                        .addGap(0, 152, Short.MAX_VALUE)
+                                                        .addComponent(jLabel1)
+                                                        .addGap(147, 147, 147))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
+                                                .createSequentialGroup()
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(79, 79, 79))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                layout.createSequentialGroup()
+                                                        .addComponent(btnAbrir)
+                                                        .addContainerGap()))));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(btnAbrir)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRemover)
-                    .addComponent(btnVoltar))
-                .addContainerGap())
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18,
+                                        Short.MAX_VALUE)
+                                .addComponent(btnAbrir)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnRemover)
+                                        .addComponent(btnVoltar))
+                                .addContainerGap()));
 
         pack();
-    }                      
+    }
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {
         TelaCadastro frame = new TelaCadastro();
         frame.setVisible(true);
         dispose();
-    }                                            
+    }
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {
-    if (jListAlunos.getSelectedIndex() != -1) {
-        int confirm = JOptionPane.showConfirmDialog(this, "Deseja remover o aluno selecionado?", "Remover Aluno", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            int selectedIndex = jListAlunos.getSelectedIndex();
-            String alunoRemovido = listModel.getElementAt(selectedIndex);
-            listModel.remove(selectedIndex);
-            jListAlunos.setModel(listModel);
-            removeAlunoFromCSV(alunoRemovido);
+        if (jListAlunos.getSelectedIndex() != -1) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Deseja remover o aluno selecionado?", "Remover Aluno",
+                    JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int selectedIndex = jListAlunos.getSelectedIndex();
+                String alunoRemovido = listModel.getElementAt(selectedIndex);
+                listModel.remove(selectedIndex);
+                jListAlunos.setModel(listModel);
+                removeAlunoFromCSV(alunoRemovido);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um aluno para remover.", "Nenhum Aluno Selecionado",
+                    JOptionPane.WARNING_MESSAGE);
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Selecione um aluno para remover.", "Nenhum Aluno Selecionado", JOptionPane.WARNING_MESSAGE);
     }
-}
 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {
         String filePath = "C:\\Users\\junio\\OneDrive\\Documentos\\trabalho final\\data.csv";
         listaSalvos frame = new listaSalvos(filePath);
         frame.setVisible(true);
         dispose();
-    }                                      
+    }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                // Replace "path/to/your/file.csv" with the actual file path of your CSV file
+
                 new listaSalvos("C:\\Users\\junio\\OneDrive\\Documentos\\trabalho final\\data.csv").setVisible(true);
             }
         });
     }
 
-    // Variables declaration                    
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jListAlunos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton btnAbrir;
-    // End of variables declaration                  
+
 }
