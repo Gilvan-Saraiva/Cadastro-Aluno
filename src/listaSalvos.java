@@ -179,21 +179,27 @@ public class listaSalvos extends javax.swing.JFrame {
     }
 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {
+
         String caminhoDoArquivo = "data.csv";
 
     listaSalvos frame = new listaSalvos(caminhoDoArquivo);
     frame.setVisible(true);
     dispose();
+
+        
     }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 String caminhoDoArquivo = "data.csv";
 
                 listaSalvos frame = new listaSalvos(caminhoDoArquivo);
                 frame.setVisible(true);
                 
+
+
             }
         });
     }

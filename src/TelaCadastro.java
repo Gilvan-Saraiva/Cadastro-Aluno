@@ -339,9 +339,9 @@ public class TelaCadastro extends javax.swing.JFrame {
     }
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
-        String caminhoDoArquivo = "data.csv";
 
-        listaSalvos frame = new listaSalvos(caminhoDoArquivo);
+        String caminhoDoArquivo = "data.csv";
+        listaSalvos frame = new listaSalvos(caminhoDoArquivo);  
         frame.setVisible(true);
         dispose();
     }
